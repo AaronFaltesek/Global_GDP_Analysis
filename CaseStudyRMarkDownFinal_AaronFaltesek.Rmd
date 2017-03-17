@@ -3,7 +3,8 @@ title: "Global GDP Analysis"
 author: "Aaron Faltesek"
 date: "March 16, 2017"
 output:
-  word_document: default
+  word_document: 
+    keep_md: yes
   pdf_document: default
   html_document: default
 ---
