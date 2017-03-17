@@ -146,3 +146,5 @@ https://www.r-bloggers.com/how-to-format-your-chart-and-axis-titles-in-ggplot2/
 http://stackoverflow.com/questions/31149875/r-knitr-and-source-function-how-to-preserve-source-file-comments-for-html-rep
 
 http://stackoverflow.com/questions/10966109/how-to-source-r-markdown-file-like-sourcemyfile-r
+
+http://stackoverflow.com/questions/11728419/using-cut-and-quartile-to-generate-breaks-in-r-function
