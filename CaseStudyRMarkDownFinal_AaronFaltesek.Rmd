@@ -1,0 +1,148 @@
+---
+title: "Global GDP Analysis"
+author: "Aaron Faltesek"
+date: "March 16, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+
+
+### Order of Contents
+
+######Introduction | 
+
+######Folder Description | 
+
+######Directions to run the code | 
+
+######References  | 
+
+#####Batch file for gather GDP data and performing analysis.
+
+
+
+
+##Introduction
+
+The folling will detail how to obtain the raw GDP and Education data sets. 
+
+The data is from the websites https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FGDP.csv and 
+https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FEDSTATS_Country.csv
+
+The first file is GDP data. This has 4 useful columns and several "blank" columns that iwll have to cleaned up.
+The useful columns are Country Code (1), GDP Ranking (2), Full Country Name (3) and GDP Amount (4)
+
+The second file is Education data. This data includes elaborated information about globla country data. There are over 20 columns in this data set.
+The most important columns that will be used for this analysis is Long Name, Income Group, and Country Code.
+
+Both sets of data have country code as well as superfulous records on global regions. In this analysis the two data sets will be joined/merged on the shares country code values.
+Then they will have to be scrubbed to rid of unneeded regional information.
+
+Common scrubbing necessary:
+1) Remove null values
+2) Remove commas from integer values for conversion and comparison
+3) Remove unneeded records - Regional data
+4) Remove messy headers
+
+
+##Folder Structure
+The folder Global_GDP_Analysis/ will contain all necessary files for this analysis
+Markdown file:
+
+-CaseStudyRMarkDownFinal_AaronFaltesek.Rmd
+
+Main file:
+
+Child source files:
+
+-CleanData.R
+
+-Question1.R
+
+-Question2.R
+
+-Question3.R
+
+-Question4.R
+
+-Question5.R
+
+HTML Output:
+
+-CaseStudyRMarkDownFinal_AaronFaltesek.html
+
+#Directions for running the code.
+
+####Libraries required
+#####Install if needed below:
+######install.packages("downloader")
+######install.packages("ggplot2")
+```{r libraries}
+require(downloader)
+library(downloader)
+
+require(ggplot2)
+library(ggplot2)
+```
+
+#####Set my directory where i'll be downloading files
+```{r directories, include=TRUE}
+setwd("D:/Users/Aaron/Documents/School/SMU/Intro_To_DataScience/Unit_8/Case_Study/Global_GDP_Analysis")
+print(getwd())
+```
+#####Getting the raw data. This data will have to be cleaned up
+```{r download, include=TRUE}
+download("https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FGDP.csv",destfile="GDP.csv")
+download("https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FEDSTATS_Country.csv ",destfile="Educ.csv")
+```
+
+#####This will call an R script that will clean up the data so that I can merge them together
+```{r clean Data, include=TRUE}
+source("CleanData.R", echo = TRUE, keep.source = TRUE)
+```
+#####This will contain the R code to answer question 1
+```{r Question1, include=TRUE}
+source("Question1.R", echo = TRUE, keep.source = TRUE)
+```
+#####I output my answer in the source file, but for clarify the answer to question one is that 224 rows were successfully joined.
+#####----------------------------------------------------------------------
+
+#####This will contain the R code to answer question 2
+```{r Question2}
+source("Question2.R", echo = TRUE, keep.source = TRUE)
+```
+#####----------------------------------------------------------------------
+
+#####This will contain the R code to answer question 3
+```{r Question3}
+source("Question3.R", echo = TRUE, keep.source = TRUE)
+```
+#####----------------------------------------------------------------------
+
+#####This will contain the R code to answer question 4
+```{r Question4}
+source("Question4.R", echo = TRUE, keep.source = TRUE)
+```
+#####----------------------------------------------------------------------
+
+#####This will contain the R code to answer question 5
+```{r Question5}
+source("Question5.R", echo = TRUE, keep.source = TRUE)
+```
+
+#Conclusion
+A lot can be learned from comparing GDP to income catagorization. After cleaning up the data and merging them on country code. I found that there were some missing corresponding matches. This reduced the total number of successful joins to 224. Then when I ordered the data by ascending on the GDP amount I found that St. Knitts and Nevis was the 13th value in the data set from the top. Next I found the mean rank of High income: OECD countries to be 32.97. I also found the mean rank of High income: nonOECD countries to be 91.91. The results of this question are specific to the initial rank assigned to each country. For the fourth question I found that there were significant outliers in the data that skewed the resulting plot. The US and China stand out as having exceptionally large GDPs.Lastly for question 5, I was able to compare the income groups to quantiles. I then found that of the lower middle income groups, in the top 38 counties(top quantile) there were 5 in both of these groups.
+
+#References
+
+https://www.r-bloggers.com/how-to-format-your-chart-and-axis-titles-in-ggplot2/
+
+http://stackoverflow.com/questions/31149875/r-knitr-and-source-function-how-to-preserve-source-file-comments-for-html-rep
+
+http://stackoverflow.com/questions/10966109/how-to-source-r-markdown-file-like-sourcemyfile-r
